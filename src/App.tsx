@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import { TopNav } from "./components/nav/TopNav";
 import { NodeGraphBackground } from "./components/NodeGraphBackground";
 import { Hero } from "./panels/Hero";
@@ -34,6 +35,7 @@ export default function App() {
         <Hobbies />
         <Contact />
       </main>
+      <Analytics />
     </>
   );
 }
