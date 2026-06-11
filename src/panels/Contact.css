@@ -1,0 +1,66 @@
+.contact-lede {
+  margin-bottom: 1.6rem;
+}
+
+.contact-email {
+  display: inline-block;
+  font-size: clamp(1.5rem, 5vw, 2.4rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  border-bottom: 1px solid var(--border-hi);
+  padding-bottom: 3px;
+  word-break: break-word;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+.contact-email:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+.contact-link {
+  flex: 1 1 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition:
+    border-color 0.2s,
+    transform 0.2s var(--ease);
+}
+.contact-link:hover:not(.dead) {
+  border-color: var(--border-hi);
+  transform: translateY(-3px);
+}
+.contact-link-label {
+  font-weight: 600;
+  color: var(--text);
+}
+.contact-link-handle {
+  font-size: 0.74rem;
+  color: var(--accent);
+}
+.contact-link.dead {
+  cursor: default;
+}
+.contact-link.dead .contact-link-handle {
+  color: var(--text-faint);
+}
+
+.contact-foot {
+  margin-top: 3rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.74rem;
+  color: var(--text-faint);
+}

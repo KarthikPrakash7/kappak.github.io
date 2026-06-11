@@ -1,0 +1,30 @@
+:root {
+  /* ---- palette: warm dark minimal (after sobhaan.com) ---- */
+  --bg: #0e1014;
+  --surface: #15181e;
+  --surface-2: #1a1d26;
+  --border: #242834;
+  --border-hi: #333847;
+
+  --text: #e8e4d8; /* warm cream */
+  --text-dim: #8b909d;
+  --text-faint: #5c616d;
+
+  --mint: #7fd8c4;
+  --mint-deep: #5fbfa9;
+  --gold: #d9a15c;
+  --coral: #e26a5c;
+
+  --accent: var(--mint);
+
+  /* ---- type ---- */
+  --font-sans: "Inter Tight", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+
+  /* ---- layout / motion ---- */
+  --maxw: 760px;
+  --radius: 10px;
+  --radius-sm: 7px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --section-gap: clamp(5rem, 12vh, 9rem);
+}

@@ -1,0 +1,19 @@
+.tag-pill {
+  display: inline-block;
+  font-size: 0.68rem;
+  line-height: 1;
+  padding: 0.4em 0.65em;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  background: var(--surface);
+  white-space: nowrap;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.tag-pill:hover {
+  border-color: var(--border-hi);
+  color: var(--accent);
+}

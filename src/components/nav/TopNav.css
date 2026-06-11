@@ -1,0 +1,123 @@
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(14, 16, 20, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.topnav-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0.9rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.topnav-brand {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text);
+}
+.topnav-brand-accent {
+  color: var(--accent);
+}
+
+.topnav-links {
+  display: flex;
+  gap: 1.3rem;
+}
+
+.topnav-link {
+  font-size: 0.78rem;
+  color: var(--text-faint);
+  position: relative;
+  transition: color 0.2s;
+}
+.topnav-link:hover {
+  color: var(--text-dim);
+}
+.topnav-link.active {
+  color: var(--accent);
+}
+.topnav-link.active::before {
+  content: "▸ ";
+}
+
+.topnav-burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.topnav-burger-bar {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: var(--text-dim);
+  transition: transform 0.2s var(--ease), opacity 0.2s var(--ease), background 0.2s;
+}
+.topnav-burger:hover .topnav-burger-bar {
+  background: var(--text);
+}
+.topnav-burger-bar.top.open {
+  transform: translateY(6.5px) rotate(45deg);
+  background: var(--accent);
+}
+.topnav-burger-bar.mid.open {
+  opacity: 0;
+}
+.topnav-burger-bar.bottom.open {
+  transform: translateY(-6.5px) rotate(-45deg);
+  background: var(--accent);
+}
+
+.topnav-mobile {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border);
+}
+
+.topnav-mobile-link {
+  padding: 0.85rem 1.5rem;
+  font-size: 0.85rem;
+  color: var(--text-faint);
+  border-bottom: 1px solid var(--border);
+  transition: color 0.2s;
+}
+.topnav-mobile-link:last-child {
+  border-bottom: none;
+}
+.topnav-mobile-link:hover {
+  color: var(--text-dim);
+}
+.topnav-mobile-link.active {
+  color: var(--accent);
+}
+.topnav-mobile-link.active::before {
+  content: "▸ ";
+}
+
+@media (max-width: 640px) {
+  .topnav-links {
+    display: none;
+  }
+  .topnav-burger {
+    display: flex;
+  }
+  .topnav-brand {
+    display: none;
+  }
+}

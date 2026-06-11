@@ -1,0 +1,33 @@
+.skill-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.skill-group-title {
+  text-transform: lowercase;
+  margin-bottom: 1rem;
+}
+
+.skill-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem 1.8rem;
+}
+
+.skill-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  transition: transform 0.2s var(--ease);
+}
+.skill-icon:hover {
+  transform: translateY(-2px);
+}
+.skill-icon i {
+  font-size: 1.5rem;
+}
+.skill-name {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+}

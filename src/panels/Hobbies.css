@@ -1,0 +1,300 @@
+.hobby-stage {
+  display: flex;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+/* ---- tiles ---- */
+.hobby-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+  flex: 1 1 100%;
+  transition:
+    flex-basis 0.4s var(--ease),
+    grid-template-columns 0.4s var(--ease);
+}
+.hobby-stage.open .hobby-grid {
+  flex: 0 0 42%;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.hobby-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  text-align: left;
+  padding: 1.1rem 1.2rem;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition:
+    border-color 0.25s,
+    background 0.25s,
+    transform 0.2s var(--ease);
+}
+.hobby-tile:hover,
+.hobby-tile.active {
+  border-color: var(--border-hi);
+  background: var(--surface-2);
+  transform: translateY(-2px);
+}
+.hobby-tile.active {
+  border-color: var(--mint);
+}
+
+.hobby-tile-glyph {
+  font-size: 1.2rem;
+  color: var(--accent);
+}
+.hobby-tile-title {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.hobby-tile-teaser {
+  font-size: 0.76rem;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+
+/* ---- detail window ---- */
+.hobby-window {
+  flex: 1 1 58%;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border-hi);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.6rem;
+}
+.hobby-window-glyph {
+  font-size: 1.5rem;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+.hobby-window-title {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+/* ---- detail body variants ---- */
+.hd-text p {
+  color: var(--text-dim);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+.hd-text p + p {
+  margin-top: 0.7rem;
+}
+
+.hd-books {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.hd-genre-name {
+  text-transform: lowercase;
+  margin-bottom: 0.4rem;
+}
+.hd-genre ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.hd-genre li {
+  color: var(--text-dim);
+  font-size: 0.88rem;
+  padding-left: 1rem;
+  position: relative;
+}
+.hd-genre li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--text-faint);
+}
+
+.hd-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.hd-link {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition:
+    border-color 0.2s,
+    transform 0.2s var(--ease);
+}
+.hd-link:hover:not(.dead) {
+  border-color: var(--border-hi);
+  transform: translateX(3px);
+}
+.hd-link-title {
+  color: var(--text);
+  font-size: 0.88rem;
+  flex: 1;
+}
+.hd-link-src {
+  font-size: 0.68rem;
+  color: var(--text-faint);
+}
+.hd-link-arrow {
+  font-size: 0.72rem;
+  color: var(--accent);
+}
+.hd-link.dead {
+  cursor: default;
+}
+.hd-link.dead .hd-link-arrow {
+  color: var(--text-faint);
+}
+
+.hd-profiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.hd-profile {
+  flex: 1 1 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition:
+    border-color 0.2s,
+    transform 0.2s var(--ease);
+}
+.hd-profile:hover:not(.dead) {
+  border-color: var(--border-hi);
+  transform: translateY(-2px);
+}
+.hd-profile-label {
+  font-weight: 600;
+  color: var(--text);
+}
+.hd-profile-handle {
+  font-size: 0.72rem;
+  color: var(--accent);
+}
+.hd-profile.dead {
+  cursor: default;
+}
+.hd-profile.dead .hd-profile-handle {
+  color: var(--text-faint);
+}
+
+/* ---- dota live stats ---- */
+.dota-profiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.dota-game {
+  margin-top: 1.4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border);
+}
+.dota-game-title {
+  font-size: 1.05rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.dota-game-src {
+  font-size: 0.66rem;
+  color: var(--text-faint);
+}
+.dota-hint {
+  margin-top: 0.8rem;
+  font-size: 0.76rem;
+  color: var(--text-faint);
+}
+/* stats now sit directly under the game title — drop its own divider */
+.dota-game + .dota-stats {
+  margin-top: 0.9rem;
+  padding-top: 0;
+  border-top: none;
+}
+.dota-stats {
+  margin-top: 1.2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border);
+}
+.dota-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+}
+.dota-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.dota-val {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.dota-sub {
+  font-size: 0.7rem;
+  color: var(--text-faint);
+  margin: 0 0.05rem;
+}
+.dota-key {
+  font-size: 0.66rem;
+  color: var(--text-faint);
+  text-transform: lowercase;
+}
+.dota-heroes {
+  margin-top: 1.2rem;
+}
+.dota-heroes-label {
+  display: block;
+  text-transform: lowercase;
+  margin-bottom: 0.5rem;
+}
+.dota-heroes ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.dota-heroes li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.8rem;
+}
+.dota-hero-name {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+.dota-hero-meta {
+  font-size: 0.7rem;
+  color: var(--text-faint);
+  white-space: nowrap;
+}
+
+/* ---- mobile ---- */
+@media (max-width: 640px) {
+  .hobby-stage,
+  .hobby-stage.open {
+    flex-direction: column;
+  }
+  .hobby-grid,
+  .hobby-stage.open .hobby-grid {
+    flex: 1 1 auto;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
