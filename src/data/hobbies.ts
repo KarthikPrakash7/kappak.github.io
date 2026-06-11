@@ -1,14 +1,19 @@
 /** Each hobby has a teaser (shown in list) and a typed detail (shown expanded). */
 export type HobbyDetail =
-  | { kind: "text"; body: string[] }
-  | { kind: "books"; genres: { genre: string; books: string[] }[] }
-  | { kind: "links"; links: { title: string; href: string; source?: string }[] }
-  | { kind: "profiles"; profiles: { label: string; handle: string; href: string }[] }
   | {
-      kind: "dota";
-      /** Steam32 / Dotabuff account_id (the number in your dotabuff URL) */
-      accountId: string;
-      links: { label: string; handle: string; href: string }[];
+      kind: "climbing";
+      grades: { grade: string; current?: boolean }[];
+    }
+  | {
+      kind: "games";
+      entries: {
+        name: string;
+        rank: string;
+        handle?: string;
+        href?: string;
+        /** Pull live stats from a third-party API instead of showing `rank` */
+        live?: { source: "opendota"; accountId: string };
+      }[];
     };
 
 export interface Hobby {
@@ -20,14 +25,18 @@ export interface Hobby {
 
 export const hobbies: Hobby[] = [
   {
-    glyph: "⌖",
-    title: "OSINT",
-    teaser: "Open-source intelligence tooling.",
+    glyph: "▲",
+    title: "Bouldering",
+    teaser: "Falling down, getting back up.",
     detail: {
-      kind: "text",
-      body: [
-        "Messing with open-source intelligence tools to gather and analyze publicly available information.",
-        "Most of the fun is in the pivot — turning one stray data point into a whole picture.",
+      kind: "climbing",
+      grades: [
+        // TODO: mark your current/highest grade with current: true
+        { grade: "V0" },
+        { grade: "V1" },
+        { grade: "V2" },
+        { grade: "V3"},
+        { grade: "V4-5", current: true },
       ],
     },
   },
@@ -36,60 +45,22 @@ export const hobbies: Hobby[] = [
     title: "Gaming",
     teaser: "I hate losing. Love the strategy.",
     detail: {
-      kind: "dota",
-      // TODO: your Steam32 / Dotabuff account_id (number in dotabuff.com/players/<id>)
-      accountId: "870551759",
-      links: [
-        // TODO: replace # with your real profile URLs
-        { label: "Steam", handle: "view profile", href: "#" },
-        { label: "Dotabuff", handle: "match history", href: "#" },
+      kind: "games",
+      entries: [
+        {
+          name: "Dota 2",
+          rank: "—",
+          handle: "view profile",
+          href: "#", // TODO: replace with your Steam/Dotabuff profile URL
+          live: { source: "opendota", accountId: "870551759" },
+        },
+        {
+          name: "League of Legends",
+          rank: "Silver II",
+          handle: "Chaeyonnie#LOVE",
+          href: "https://op.gg/lol/summoners/euw/Chaeyonnie-LOVE",
+        },
       ],
-    },
-  },
-  {
-    glyph: "❋",
-    title: "Reading",
-    teaser: "Fiction & fantasy, by genre.",
-    detail: {
-      kind: "books",
-      // TODO: swap in your real favourites
-      genres: [
-        { genre: "Fantasy", books: ["Title one", "Title two", "Title three"] },
-        { genre: "Sci-Fi", books: ["Title one", "Title two"] },
-        { genre: "Fiction", books: ["Title one", "Title two"] },
-      ],
-    },
-  },
-  {
-    glyph: "✺",
-    title: "Astrophysics",
-    teaser: "Interesting space news.",
-    detail: {
-      kind: "links",
-      // TODO: swap in articles you actually rate
-      links: [
-        { title: "Add a space-news article here", href: "#", source: "source.com" },
-        { title: "And another one", href: "#", source: "source.com" },
-        { title: "And one more", href: "#", source: "source.com" },
-      ],
-    },
-  },
-  {
-    glyph: "➤",
-    title: "Running",
-    teaser: "Here to boast about one 10k.",
-    detail: {
-      kind: "text",
-      body: ["Here to boast about the one 10k I did last year. The bar is on the floor and I am proud of it."],
-    },
-  },
-  {
-    glyph: "▲",
-    title: "Climbing",
-    teaser: "Falling down, getting back up.",
-    detail: {
-      kind: "text",
-      body: ["I enjoy falling down and getting back up to fall again. Bouldering mostly — the puzzle matters more than the height."],
     },
   },
 ];

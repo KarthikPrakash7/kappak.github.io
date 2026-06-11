@@ -5,85 +5,45 @@ import { Section, reveal } from "../components/Section";
 import { useOpenDota } from "../hooks/useOpenDota";
 import "./Hobbies.css";
 
-function DotaStats({
-  accountId,
-  links,
-}: {
-  accountId: string;
-  links: { label: string; handle: string; href: string }[];
-}) {
+function DotaStats({ accountId }: { accountId: string }) {
   const { loading, error, data } = useOpenDota(accountId, true);
 
+  if (loading) return <p className="dota-hint mono">loading live stats…</p>;
+  if (error) return <p className="dota-hint mono">⚠ {error}</p>;
+  if (!data) return null;
+
   return (
-    <div className="dota">
-      <div className="dota-profiles">
-        {links.map((p) => {
-          const dead = p.href === "#";
-          return (
-            <a
-              key={p.label}
-              className={`hd-profile ${dead ? "dead" : ""}`}
-              href={dead ? undefined : p.href}
-              target={dead ? undefined : "_blank"}
-              rel={dead ? undefined : "noreferrer"}
-            >
-              <span className="hd-profile-label">{p.label}</span>
-              <span className="hd-profile-handle mono">
-                {dead ? "·tbd" : p.handle} {dead ? "" : "↗"}
-              </span>
-            </a>
-          );
-        })}
+    <div className="dota-stats">
+      <div className="dota-row">
+        <span className="dota-stat">
+          <span className="dota-val">{data.rank}</span>
+          <span className="dota-key mono">rank</span>
+        </span>
+        <span className="dota-stat">
+          <span className="dota-val">{Math.round(data.winrate * 100)}%</span>
+          <span className="dota-key mono">winrate</span>
+        </span>
+        <span className="dota-stat">
+          <span className="dota-val">
+            {data.win}<span className="dota-sub">W</span> / {data.lose}
+            <span className="dota-sub">L</span>
+          </span>
+          <span className="dota-key mono">record</span>
+        </span>
       </div>
-
-      <div className="dota-game">
-        <h4 className="dota-game-title">
-          Dota 2 <span className="dota-game-src mono">· opendota</span>
-        </h4>
-      </div>
-
-      {!accountId && (
-        <p className="dota-hint mono">
-          add your account_id in data/hobbies.ts to pull live stats
-        </p>
-      )}
-      {accountId && loading && <p className="dota-hint mono">loading live stats…</p>}
-      {accountId && error && <p className="dota-hint mono">⚠ {error}</p>}
-
-      {data && (
-        <div className="dota-stats">
-          <div className="dota-row">
-            <span className="dota-stat">
-              <span className="dota-val">{data.rank}</span>
-              <span className="dota-key mono">rank</span>
-            </span>
-            <span className="dota-stat">
-              <span className="dota-val">{Math.round(data.winrate * 100)}%</span>
-              <span className="dota-key mono">winrate</span>
-            </span>
-            <span className="dota-stat">
-              <span className="dota-val">
-                {data.win}<span className="dota-sub">W</span> / {data.lose}
-                <span className="dota-sub">L</span>
-              </span>
-              <span className="dota-key mono">record</span>
-            </span>
-          </div>
-          {data.topHeroes.length > 0 && (
-            <div className="dota-heroes">
-              <span className="label dota-heroes-label">most played</span>
-              <ul>
-                {data.topHeroes.map((h) => (
-                  <li key={h.name}>
-                    <span className="dota-hero-name">{h.name}</span>
-                    <span className="dota-hero-meta mono">
-                      {h.games} games · {Math.round(h.winrate * 100)}%
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+      {data.topHeroes.length > 0 && (
+        <div className="dota-heroes">
+          <span className="label dota-heroes-label">most played</span>
+          <ul>
+            {data.topHeroes.map((h) => (
+              <li key={h.name}>
+                <span className="dota-hero-name">{h.name}</span>
+                <span className="dota-hero-meta mono">
+                  {h.games} games · {Math.round(h.winrate * 100)}%
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </div>
@@ -92,75 +52,54 @@ function DotaStats({
 
 function DetailView({ detail }: { detail: HobbyDetail }) {
   switch (detail.kind) {
-    case "text":
+    case "climbing":
       return (
-        <div className="hd-text">
-          {detail.body.map((p) => (
-            <p key={p}>{p}</p>
-          ))}
-        </div>
-      );
-    case "books":
-      return (
-        <div className="hd-books">
-          {detail.genres.map((g) => (
-            <div className="hd-genre" key={g.genre}>
-              <h4 className="hd-genre-name mono">{g.genre}</h4>
-              <ul>
-                {g.books.map((b) => (
-                  <li key={b}>{b}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      );
-    case "links":
-      return (
-        <ul className="hd-links">
-          {detail.links.map((l) => {
-            const dead = l.href === "#";
-            return (
-              <li key={l.title}>
-                <a
-                  className={`hd-link ${dead ? "dead" : ""}`}
-                  href={dead ? undefined : l.href}
-                  target={dead ? undefined : "_blank"}
-                  rel={dead ? undefined : "noreferrer"}
+        <div className="hd-climbing">
+          <div className="hd-grades">
+            <span className="label">grades climbed</span>
+            <div className="hd-grade-row">
+              {detail.grades.map((g) => (
+                <span
+                  key={g.grade}
+                  className={`hd-grade-pill mono ${g.current ? "current" : ""}`}
                 >
-                  <span className="hd-link-title">{l.title}</span>
-                  {l.source && <span className="hd-link-src mono">{l.source}</span>}
-                  <span className="hd-link-arrow mono">{dead ? "·tbd" : "↗"}</span>
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-      );
-    case "profiles":
-      return (
-        <div className="hd-profiles">
-          {detail.profiles.map((p) => {
-            const dead = p.href === "#";
-            return (
-              <a
-                key={p.label}
-                className={`hd-profile ${dead ? "dead" : ""}`}
-                href={dead ? undefined : p.href}
-                target={dead ? undefined : "_blank"}
-                rel={dead ? undefined : "noreferrer"}
-              >
-                <span className="hd-profile-label">{p.label}</span>
-                <span className="hd-profile-handle mono">
-                  {dead ? "·tbd" : p.handle} {dead ? "" : "↗"}
+                  {g.grade}
                 </span>
-              </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    case "games":
+      return (
+        <div className="hd-games">
+          {detail.entries.map((e) => {
+            const dead = e.href === "#";
+            return (
+              <div className="hd-game" key={e.name}>
+                <div className="hd-game-head">
+                  <h4 className="hd-game-name">{e.name}</h4>
+                  {e.href && (
+                    <a
+                      className={`hd-game-link mono ${dead ? "dead" : ""}`}
+                      href={dead ? undefined : e.href}
+                      target={dead ? undefined : "_blank"}
+                      rel={dead ? undefined : "noreferrer"}
+                    >
+                      {dead ? "·tbd" : `${e.handle} ↗`}
+                    </a>
+                  )}
+                </div>
+                {e.live?.source === "opendota" ? (
+                  <DotaStats accountId={e.live.accountId} />
+                ) : (
+                  <span className="hd-game-rank mono">{e.rank}</span>
+                )}
+              </div>
             );
           })}
         </div>
       );
-    case "dota":
-      return <DotaStats accountId={detail.accountId} links={detail.links} />;
   }
 }
 
