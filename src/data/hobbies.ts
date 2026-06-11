@@ -51,7 +51,7 @@ export const hobbies: Hobby[] = [
           name: "Dota 2",
           rank: "—",
           handle: "view profile",
-          href: "#", // TODO: replace with your Steam/Dotabuff profile URL
+          href: "https://www.dotabuff.com/players/870551759",
           live: { source: "opendota", accountId: "870551759" },
         },
         {
