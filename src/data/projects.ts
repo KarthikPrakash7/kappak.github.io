@@ -10,6 +10,14 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    name: "StockDash",
+    blurb:
+      "Self-retraining stock prediction dashboard. Daily pipeline ingests OHLCV data, engineers features, retrains an XGBoost model, and serves predictions to a React UI with candlestick charts.",
+    tags: ["Python", "FastAPI", "XGBoost", "React", "Docker"],
+    github: "https://github.com/KarthikPrakash7/stockdash",
+    demo: "#",
+  },
+  {
     name: "Reddit Scraper",
     blurb:
       "Scrapes Reddit posts and comments at scale for sentiment analysis and opinion mining. Multi-subreddit, configurable scrape intervals.",
