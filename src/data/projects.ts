@@ -10,6 +10,14 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    name: "Hold & Grasp Study",
+    blurb:
+      "Research pipeline benchmarking open-vocabulary VLMs (LocateAnything, Grounding DINO, YOLOv8) on climbing hold detection and classification, with planned transfer to robotic grasp affordances.",
+    tags: ["Python", "Computer Vision", "YOLOv8", "Grounding DINO", "VLMs"],
+    github: "https://github.com/KarthikPrakash7/hold-grasp-study",
+    demo: "#",
+  },
+  {
     name: "StockDash",
     blurb:
       "Self-retraining stock prediction dashboard. Daily pipeline ingests OHLCV data, engineers features, retrains an XGBoost model, and serves predictions to a React UI with candlestick charts.",
