@@ -10,6 +10,14 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    name: "SAP Security Scanner",
+    blurb:
+      "Catches CVEs, leaked secrets, and BTP misconfigurations in MTA/CAP projects before deploy. Static analysis tuned for SAP Cloud Application Programming model.",
+    tags: ["Python", "SAP BTP", "Security", "CAP", "Static Analysis"],
+    github: "https://github.com/KarthikPrakash7/sap-security-scanner",
+    demo: "#",
+  },
+  {
     name: "Hold & Grasp Study",
     blurb:
       "Research pipeline benchmarking open-vocabulary VLMs (LocateAnything, Grounding DINO, YOLOv8) on climbing hold detection and classification, with planned transfer to robotic grasp affordances.",
@@ -40,23 +48,5 @@ export const projects: Project[] = [
     tags: ["React", "Node.js", "Express", "Python"],
     github: "#",
     demo: "#",
-  },
-  {
-    name: "Weather Dashboard",
-    blurb:
-      "Interactive weather dashboard with forecasts, maps, and historical data viz. Responsive, dark-mode first.",
-    tags: ["React", "D3.js", "Chart.js", "OpenWeather"],
-    github: "#",
-    demo: "#",
-    placeholder: true,
-  },
-  {
-    name: "Portfolio CMS",
-    blurb:
-      "Drag-and-drop portfolio builder with SEO tooling and analytics integration.",
-    tags: ["Next.js", "PostgreSQL", "Prisma", "AWS S3"],
-    github: "#",
-    demo: "#",
-    placeholder: true,
   },
 ];
